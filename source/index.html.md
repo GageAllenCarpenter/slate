@@ -320,7 +320,7 @@ EDI transaction ID's are generated on creation of an EDI transaction.
 </aside>
 
 <aside class="notice">
-Supported types are EDI, JSON, and XML
+Supported types are EDI, JSON, and XML.
 </aside>
 
 ### Response Body
@@ -892,8 +892,8 @@ Submit a new Interchange requirement.
 ### Request Body
 Parameter|Type |Description
 ---------|-----|-----------
-set | integer | transaction set number
-segments | array | segments or loops associated with the transaction set
+set | integer | transaction set number.
+segments | array | segments or loops associated with the transaction set.
 
 In Electronic Data Interchange (EDI), a **set** represents a particular type of transaction or interchange, such as an order, invoice, or shipment notice. For example, the ANSI X12 standard includes transaction sets like 850 (Purchase Order) and 810 (Invoice).
 
@@ -915,16 +915,802 @@ reason | string | description of the state or condition of the request.
 
 
 ## Get Interchange Rule
+> OK Response:
+
+```json
+{
+  "set": "850",
+  "segments": [
+    {
+        "segment": "ST",
+        "segment rule": "a3d8d2b4-1a5c-4d2e-8e76-f6c9bc2041ae",
+        "optional": false
+    },
+    {
+        "segment": "BEG",
+        "segment rule": "f9e65d0c-f5b5-44a0-8971-1c5a55cdd5c9",
+        "optional": false
+    },
+    {
+        "segment": "CUR",
+        "segment rule": "0ab7c1f0-6db5-4e5c-b1c0-d1357d3b4e37",
+        "optional": true
+    },
+    {
+        "segment": "REF",
+        "segment rule": "b1c7d776-1e0c-4f76-853e-63bc25618d54",
+        "optional": true
+    },
+    {
+        "segment": "PER",
+        "segment rule": "0e6c1459-dcb6-4180-8c8c-b58e25be21b9",
+        "optional": true
+    },
+    {
+        "segment": "TAX",
+        "segment rule": "d1c9d7ab-3b8f-4b57-8124-4749f85873c8",
+        "optional": true
+    },
+    {
+        "segment": "FOB",
+        "segment rule": "7caa2ec8-9c2a-45c6-9b4a-e0a9f2500f57",
+        "optional": true
+    },
+    {
+        "segment": "CTP",
+        "segment rule": "5f7635a4-e1d2-4f00-8c28-7b8f3c5c79f6",
+        "optional": true
+    },
+            {
+        "segment": "PAM",
+        "segment rule": "b60f7f59-63e1-45e6-92e3-4d1b46c8c0da",
+        "optional": true
+    },
+    {
+        "segment": "CSH",
+        "segment rule": "f7c6c7a0-0f9e-41c3-8596-b78b054f2f8c",
+        "optional": true
+    },
+    {
+        "segment": "TC2",
+        "segment rule": "71b3cc8b-b48a-4650-8059-3b6456c0ef7a",
+        "optional": true
+    },
+    {
+        "loop": "SAC",
+        "loop rule": "c567cb8e-e2c5-42ed-9a24-f2e3c2c0a8ed",
+        "optional": true
+    },
+    {
+        "segment": "ITD",
+        "segment rule": "e9f4b1e6-d44f-4c4d-b76e-91d0db9e2d6f",
+        "optional": true
+    },
+    {
+        "segment": "DIS",
+        "segment rule": "1f81e2b3-9264-4e58-b5aa-3d65b76334c4",
+        "optional": true
+    },
+    {
+        "segment": "INC",
+        "segment rule": "f31f4e36-47b3-42ed-8514-982cde58b7c5",
+        "optional": true
+    },
+    {
+        "segment": "DTM",
+        "segment rule": "2549f3e8-2f2b-41d1-a2c5-b60cdb65e7c8",
+        "optional": true
+    },
+    {
+        "segment": "LIN",
+        "segment rule": "2e9731a5-33e8-44b7-975b-21ff634594e7",
+        "optional": true
+    },
+    {
+        "segment": "SI",
+        "segment rule": "7cf2cbd8-2aa6-403b-a7f4-6f097d49e320",
+        "optional": true
+    },
+    {
+        "segment": "PID",
+        "segment rule": "7d3f1210-5aef-453f-abc1-e8d74a536a9c",
+        "optional": true
+    },
+    {
+        "segment": "MEA",
+        "segment rule": "4b99c5e5-b379-45aa-80ed-703a58a895e8",
+        "optional": true
+    },
+    {
+        "segment": "PWK",
+        "segment rule": "8bb03304-3c66-467f-80b7-fc3e8cda00f8",
+        "optional": true
+    },
+    {
+        "segment": "PKG",
+        "segment rule": "a3d8d2b4-1a5c-4d2e-8e76-f6c9bc2041ae",
+        "optional": true
+    },
+    {
+        "segment": "TD1",
+        "segment rule": "f9e65d0c-f5b5-44a0-8971-1c5a55cdd5c9",
+        "optional": true
+    },
+    {
+        "segment": "TD5",
+        "segment rule": "0ab7c1f0-6db5-4e5c-b1c0-d1357d3b4e37",
+        "optional": true
+    },
+    {
+        "segment": "TD3",
+        "segment rule": "b1c7d776-1e0c-4f76-853e-63bc25618d54",
+        "optional": true
+    },
+    {
+        "segment": "TD4",
+        "segment rule": "0e6c1459-dcb6-4180-8c8c-b58e25be21b9",
+        "optional": true
+    },
+    {
+        "segment": "MAN",
+        "segment rule": "d1c9d7ab-3b8f-4b57-8124-4749f85873c8",
+        "optional": true
+    },
+    {
+        "segment": "PCT",
+        "segment rule": "7caa2ec8-9c2a-45c6-9b4a-e0a9f2500f57",
+        "optional": true
+    },
+    {
+        "segment": "CTB",
+        "segment rule": "5f7635a4-e1d2-4f00-8c28-7b8f3c5c79f6",
+        "optional": true
+    },
+    {
+        "segment": "TXI",
+        "segment rule": "b60f7f59-63e1-45e6-92e3-4d1b46c8c0da",
+        "optional": true
+    },
+    {
+        "loop": "LDT",
+        "loop rule": "f7c6c7a0-0f9e-41c3-8596-b78b054f2f8c",
+        "optional": true
+    },
+    {
+        "loop": "AMT",
+        "loop rule": "71b3cc8b-b48a-4650-8059-3b6456c0ef7a",
+        "optional": true
+    },
+    {
+        "loop": "FA1",
+        "loop rule": "c567cb8e-e2c5-42ed-9a24-f2e3c2c0a8ed",
+        "optional": true
+    },
+    {
+        "loop": "N9",
+        "loop rule": "e9f4b1e6-d44f-4c4d-b76e-91d0db9e2d6f",
+        "optional": true
+    },
+    {
+        "loop": "N1",
+        "loop rule": "1f81e2b3-9264-4e58-b5aa-3d65b76334c4",
+        "optional": true
+    },
+    {
+        "loop": "LM",
+        "loop rule": "f31f4e36-47b3-42ed-8514-982cde58b7c5",
+        "optional": true
+    },
+    {
+        "loop": "SPI",
+        "loop rule": "2549f3e8-2f2b-41d1-a2c5-b60cdb65e7c8",
+        "optional": true
+    },
+    {
+        "loop": "N1",
+        "loop rule": "2e9731a5-33e8-44b7-975b-21ff634594e7",
+        "optional": true
+    },
+    {
+        "loop": "CB1",
+        "loop rule": "7cf2cbd8-2aa6-403b-a7f4-6f097d49e320",
+        "optional": true
+    },
+    {
+        "loop": "ADV",
+        "loop rule": "7d3f1210-5aef-453f-abc1-e8d74a536a9c",
+        "optional": true
+    },
+    {
+        "loop": "PO1",
+        "loop rule": "4b99c5e5-b379-45aa-80ed-703a58a895e8",
+        "optional": true
+    },
+    {
+        "loop": "CTP",
+        "loop rule": "8bb03304-3c66-467f-80b7-fc3e8cda00f8",
+        "optional": true
+    },
+    {
+        "loop": "PID",
+        "loop rule": "a3d8d2b4-1a5c-4d2e-8e76-f6c9bc2041ae",
+        "optional": true
+    },
+    {
+        "loop": "SAC",
+        "loop rule": "f9e65d0c-f5b5-44a0-8971-1c5a55cdd5c9",
+        "optional": true
+    },
+    {
+        "loop": "QTY",
+        "loop rule": "0ab7c1f0-6db5-4e5c-b1c0-d1357d3b4e37",
+        "optional": true
+    },
+    {
+        "loop": "SCH",
+        "loop rule": "b1c7d776-1e0c-4f76-853e-63bc25618d54",
+        "optional": true
+    },
+    {
+        "loop": "PKG",
+        "loop rule": "0e6c1459-dcb6-4180-8c8c-b58e25be21b9",
+        "optional": true
+    },
+    {
+        "loop": "LDT",
+        "loop rule": "d1c9d7ab-3b8f-4b57-8124-4749f85873c8",
+        "optional": true
+    },
+    {
+        "loop": "LM",
+        "loop rule": "7caa2ec8-9c2a-45c6-9b4a-e0a9f2500f57",
+        "optional": true
+    },
+    {
+        "loop": "N9",
+        "loop rule": "5f7635a4-e1d2-4f00-8c28-7b8f3c5c79f6",
+        "optional": true
+    },
+    {
+        "loop": "N1",
+        "loop rule": "b60f7f59-63e1-45e6-92e3-4d1b46c8c0da",
+        "optional": true
+    },
+    {
+        "loop": "LDT",
+        "loop rule": "f7c6c7a0-0f9e-41c3-8596-b78b054f2f8c",
+        "optional": true
+    },
+    {
+        "loop": "SLN",
+        "loop rule": "71b3cc8b-b48a-4650-8059-3b6456c0ef7a",
+        "optional": true
+    },
+    {
+        "loop": "N9",
+        "loop rule": "c567cb8e-e2c5-42ed-9a24-f2e3c2c0a8ed",
+        "optional": true
+    },
+    {
+        "loop": "SAC",
+        "loop rule": "e9f4b1e6-d44f-4c4d-b76e-91d0db9e2d6f",
+        "optional": true
+    },
+    {
+        "loop": "QTY",
+        "loop rule": "1f81e2b3-9264-4e58-b5aa-3d65b76334c4",
+        "optional": true
+    },
+    {
+        "loop": "N1",
+        "loop rule": "f31f4e36-47b3-42ed-8514-982cde58b7c5",
+        "optional": true
+    },
+    {
+        "loop": "AMT",
+        "loop rule": "2549f3e8-2f2b-41d1-a2c5-b60cdb65e7c8",
+        "optional": true
+    },
+    {
+        "loop": "LM",
+        "loop rule": "2e9731a5-33e8-44b7-975b-21ff634594e7",
+        "optional": true
+    },
+    {
+        "loop": "CTT",
+        "loop rule": "7cf2cbd8-2aa6-403b-a7f4-6f097d49e320",
+        "optional": true
+    },
+    {
+        "segment": "SE",
+        "segment rule": "7d3f1210-5aef-453f-abc1-e8d74a536a9c",
+        "optional": false
+    }
+  ],
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "set": "",
+  "segments": [],
+  "status": "error",
+  "reason": "match not found"
+}
+```
+
 Retrieve a specific Interchange requirement by the Interchange Rule ID.
+### HTTP Request
+`GET http://example.com/api/v1/Interchange`
+
+
+### Query Parameters
+
+Parameter|Type |Description
+---------|-----|-----------
+id| string | unique identifier associated with the Interchange Rule.
+type | string | the data type to return.
+
+<aside class="notice">
+Interchange Rule ID's are generated on creation of an Interchange Rule.
+</aside>
+
+<aside class="notice">
+Supported types are EDI, JSON, and XML.
+</aside>
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+set | integer | transaction set number.
+segments | array | segments or loops associated with the transaction set.
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 ## Get Interchange Rules
-Retrieve all requirements of a specific Interchange by the Interchange ID.
+> OK Response:
+
+```json
+{
+  "rules": [
+      "550e8400-e29b-41d4-a716-446655440000",
+      "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "b2a4e3d2-e5b0-4bcf-8f34-2c17d4746b29",
+      "4b1aef76-d6f8-4b16-92f8-f3a7c5d4d2c3",
+      "d19d1cb4-1df0-4bb1-8f26-8972f06c4d3c",
+      "cfa3e8bb-8b74-49cf-9e6f-f01a05b09f9e",
+      "8d19e6e7-154c-41c1-bc05-45e0c7f3e8d0",
+      "e2b1c062-27e3-4f7c-b5b1-e30a6f6f4e60",
+      "1f8a59dc-fc65-43ff-a203-b0f8e73a63a4",
+      "72b7e1a3-2345-40d8-b82b-9e3a4b45265a"
+  ],
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "rules": [],
+  "status": "error",
+  "reason": "match not found"
+}
+```
+Fetch a list of all Intechange requirement IDs.
+### HTTP Request
+`GET http://example.com/api/v1/Interchange`
+
+### Query Parameters
+
+Parameter|Type |Description
+---------|-----|-----------
+page | integer | the current page number in a paginated data set.
+size | integer | the number of items to be included on each page.
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+rules | array | Interchange Rule IDs.
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
+
+<aside class="notice">
+Size limitations prevent all rules from appearing. The ID associated with the rule appears instead and the <code>GET Interchange</code> endpoint can be used to view the details of each ruleset.
+</aside>
 
 ## Update Interchange Rule
+> Request:
+
+```json
+{
+  "id": "72b7e1a3-2345-40d8-b82b-9e3a4b45265a",
+  "set": 850,
+  "segments": [
+    {
+        "segment": "ST",
+        "segment rule": "a3d8d2b4-1a5c-4d2e-8e76-f6c9bc2041ae",
+        "optional": false
+    },
+    {
+        "segment": "BEG",
+        "segment rule": "f9e65d0c-f5b5-44a0-8971-1c5a55cdd5c9",
+        "optional": false
+    },
+    {
+        "segment": "CUR",
+        "segment rule": "0ab7c1f0-6db5-4e5c-b1c0-d1357d3b4e37",
+        "optional": true
+    },
+    {
+        "segment": "REF",
+        "segment rule": "b1c7d776-1e0c-4f76-853e-63bc25618d54",
+        "optional": true
+    },
+    {
+        "segment": "PER",
+        "segment rule": "0e6c1459-dcb6-4180-8c8c-b58e25be21b9",
+        "optional": true
+    },
+    {
+        "segment": "TAX",
+        "segment rule": "d1c9d7ab-3b8f-4b57-8124-4749f85873c8",
+        "optional": true
+    },
+    {
+        "segment": "FOB",
+        "segment rule": "7caa2ec8-9c2a-45c6-9b4a-e0a9f2500f57",
+        "optional": true
+    },
+    {
+        "segment": "CTP",
+        "segment rule": "5f7635a4-e1d2-4f00-8c28-7b8f3c5c79f6",
+        "optional": true
+    },
+            {
+        "segment": "PAM",
+        "segment rule": "b60f7f59-63e1-45e6-92e3-4d1b46c8c0da",
+        "optional": true
+    },
+    {
+        "segment": "CSH",
+        "segment rule": "f7c6c7a0-0f9e-41c3-8596-b78b054f2f8c",
+        "optional": true
+    },
+    {
+        "segment": "TC2",
+        "segment rule": "71b3cc8b-b48a-4650-8059-3b6456c0ef7a",
+        "optional": true
+    },
+    {
+        "loop": "SAC",
+        "loop rule": "c567cb8e-e2c5-42ed-9a24-f2e3c2c0a8ed",
+        "optional": true
+    },
+    {
+        "segment": "ITD",
+        "segment rule": "e9f4b1e6-d44f-4c4d-b76e-91d0db9e2d6f",
+        "optional": true
+    },
+    {
+        "segment": "DIS",
+        "segment rule": "1f81e2b3-9264-4e58-b5aa-3d65b76334c4",
+        "optional": true
+    },
+    {
+        "segment": "INC",
+        "segment rule": "f31f4e36-47b3-42ed-8514-982cde58b7c5",
+        "optional": true
+    },
+    {
+        "segment": "DTM",
+        "segment rule": "2549f3e8-2f2b-41d1-a2c5-b60cdb65e7c8",
+        "optional": true
+    },
+    {
+        "segment": "LIN",
+        "segment rule": "2e9731a5-33e8-44b7-975b-21ff634594e7",
+        "optional": true
+    },
+    {
+        "segment": "SI",
+        "segment rule": "7cf2cbd8-2aa6-403b-a7f4-6f097d49e320",
+        "optional": true
+    },
+    {
+        "segment": "PID",
+        "segment rule": "7d3f1210-5aef-453f-abc1-e8d74a536a9c",
+        "optional": true
+    },
+    {
+        "segment": "MEA",
+        "segment rule": "4b99c5e5-b379-45aa-80ed-703a58a895e8",
+        "optional": true
+    },
+    {
+        "segment": "PWK",
+        "segment rule": "8bb03304-3c66-467f-80b7-fc3e8cda00f8",
+        "optional": true
+    },
+    {
+        "segment": "PKG",
+        "segment rule": "a3d8d2b4-1a5c-4d2e-8e76-f6c9bc2041ae",
+        "optional": true
+    },
+    {
+        "segment": "TD1",
+        "segment rule": "f9e65d0c-f5b5-44a0-8971-1c5a55cdd5c9",
+        "optional": true
+    },
+    {
+        "segment": "TD5",
+        "segment rule": "0ab7c1f0-6db5-4e5c-b1c0-d1357d3b4e37",
+        "optional": true
+    },
+    {
+        "segment": "TD3",
+        "segment rule": "b1c7d776-1e0c-4f76-853e-63bc25618d54",
+        "optional": true
+    },
+    {
+        "segment": "TD4",
+        "segment rule": "0e6c1459-dcb6-4180-8c8c-b58e25be21b9",
+        "optional": true
+    },
+    {
+        "segment": "MAN",
+        "segment rule": "d1c9d7ab-3b8f-4b57-8124-4749f85873c8",
+        "optional": true
+    },
+    {
+        "segment": "PCT",
+        "segment rule": "7caa2ec8-9c2a-45c6-9b4a-e0a9f2500f57",
+        "optional": true
+    },
+    {
+        "segment": "CTB",
+        "segment rule": "5f7635a4-e1d2-4f00-8c28-7b8f3c5c79f6",
+        "optional": true
+    },
+    {
+        "segment": "TXI",
+        "segment rule": "b60f7f59-63e1-45e6-92e3-4d1b46c8c0da",
+        "optional": true
+    },
+    {
+        "loop": "LDT",
+        "loop rule": "f7c6c7a0-0f9e-41c3-8596-b78b054f2f8c",
+        "optional": true
+    },
+    {
+        "loop": "AMT",
+        "loop rule": "71b3cc8b-b48a-4650-8059-3b6456c0ef7a",
+        "optional": true
+    },
+    {
+        "loop": "FA1",
+        "loop rule": "c567cb8e-e2c5-42ed-9a24-f2e3c2c0a8ed",
+        "optional": true
+    },
+    {
+        "loop": "N9",
+        "loop rule": "e9f4b1e6-d44f-4c4d-b76e-91d0db9e2d6f",
+        "optional": true
+    },
+    {
+        "loop": "N1",
+        "loop rule": "1f81e2b3-9264-4e58-b5aa-3d65b76334c4",
+        "optional": true
+    },
+    {
+        "loop": "LM",
+        "loop rule": "f31f4e36-47b3-42ed-8514-982cde58b7c5",
+        "optional": true
+    },
+    {
+        "loop": "SPI",
+        "loop rule": "2549f3e8-2f2b-41d1-a2c5-b60cdb65e7c8",
+        "optional": true
+    },
+    {
+        "loop": "N1",
+        "loop rule": "2e9731a5-33e8-44b7-975b-21ff634594e7",
+        "optional": true
+    },
+    {
+        "loop": "CB1",
+        "loop rule": "7cf2cbd8-2aa6-403b-a7f4-6f097d49e320",
+        "optional": true
+    },
+    {
+        "loop": "ADV",
+        "loop rule": "7d3f1210-5aef-453f-abc1-e8d74a536a9c",
+        "optional": true
+    },
+    {
+        "loop": "PO1",
+        "loop rule": "4b99c5e5-b379-45aa-80ed-703a58a895e8",
+        "optional": true
+    },
+    {
+        "loop": "CTP",
+        "loop rule": "8bb03304-3c66-467f-80b7-fc3e8cda00f8",
+        "optional": true
+    },
+    {
+        "loop": "PID",
+        "loop rule": "a3d8d2b4-1a5c-4d2e-8e76-f6c9bc2041ae",
+        "optional": true
+    },
+    {
+        "loop": "SAC",
+        "loop rule": "f9e65d0c-f5b5-44a0-8971-1c5a55cdd5c9",
+        "optional": true
+    },
+    {
+        "loop": "QTY",
+        "loop rule": "0ab7c1f0-6db5-4e5c-b1c0-d1357d3b4e37",
+        "optional": true
+    },
+    {
+        "loop": "SCH",
+        "loop rule": "b1c7d776-1e0c-4f76-853e-63bc25618d54",
+        "optional": true
+    },
+    {
+        "loop": "PKG",
+        "loop rule": "0e6c1459-dcb6-4180-8c8c-b58e25be21b9",
+        "optional": true
+    },
+    {
+        "loop": "LDT",
+        "loop rule": "d1c9d7ab-3b8f-4b57-8124-4749f85873c8",
+        "optional": true
+    },
+    {
+        "loop": "LM",
+        "loop rule": "7caa2ec8-9c2a-45c6-9b4a-e0a9f2500f57",
+        "optional": true
+    },
+    {
+        "loop": "N9",
+        "loop rule": "5f7635a4-e1d2-4f00-8c28-7b8f3c5c79f6",
+        "optional": true
+    },
+    {
+        "loop": "N1",
+        "loop rule": "b60f7f59-63e1-45e6-92e3-4d1b46c8c0da",
+        "optional": true
+    },
+    {
+        "loop": "LDT",
+        "loop rule": "f7c6c7a0-0f9e-41c3-8596-b78b054f2f8c",
+        "optional": true
+    },
+    {
+        "loop": "SLN",
+        "loop rule": "71b3cc8b-b48a-4650-8059-3b6456c0ef7a",
+        "optional": true
+    },
+    {
+        "loop": "N9",
+        "loop rule": "c567cb8e-e2c5-42ed-9a24-f2e3c2c0a8ed",
+        "optional": true
+    },
+    {
+        "loop": "SAC",
+        "loop rule": "e9f4b1e6-d44f-4c4d-b76e-91d0db9e2d6f",
+        "optional": true
+    },
+    {
+        "loop": "QTY",
+        "loop rule": "1f81e2b3-9264-4e58-b5aa-3d65b76334c4",
+        "optional": true
+    },
+    {
+        "loop": "N1",
+        "loop rule": "f31f4e36-47b3-42ed-8514-982cde58b7c5",
+        "optional": true
+    },
+    {
+        "loop": "AMT",
+        "loop rule": "2549f3e8-2f2b-41d1-a2c5-b60cdb65e7c8",
+        "optional": true
+    },
+    {
+        "loop": "LM",
+        "loop rule": "2e9731a5-33e8-44b7-975b-21ff634594e7",
+        "optional": true
+    },
+    {
+        "loop": "CTT",
+        "loop rule": "7cf2cbd8-2aa6-403b-a7f4-6f097d49e320",
+        "optional": true
+    },
+    {
+        "segment": "SE",
+        "segment rule": "7d3f1210-5aef-453f-abc1-e8d74a536a9c",
+        "optional": false
+    }
+  ]
+}
+```
+
+> OK Response:
+
+```json
+{
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "status": "error",
+  "reason": "match not found"
+}
+```
+
 Modify an existing Interchange requirement.
+### HTTP Request
+`PUT http://example.com/v1/Interchange`
+
+### Request Body
+
+Parameter|Type |Description
+---------|-----|-----------
+id| string | unique identifier associated with the Interchange Rule.
+set | integer | transaction set number.
+segments | array | segments or loops associated with the transaction set.
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 ## Delete Interchange Rule
+> OK Response:
+
+```json
+{
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "status": "error",
+  "reason": "match not found"
+}
+```
+
 Remove a specific Interchange requirement from the system.
+### HTTP Request
+`DELETE http://example.com/v1/Interchange`
+
+### Query Parameters
+
+Parameter|Type |Description
+---------|-----|-----------
+id| string | unique identifier associated with the Interchange Rule.
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 <aside class="warning">
 Deleting the Interchange Rule will remove it from the system, but it will not prevent any existing processes from completing their current operations on that transaction.
