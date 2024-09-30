@@ -893,7 +893,7 @@ Submit a new Interchange requirement.
 Parameter|Type |Description
 ---------|-----|-----------
 set | integer | transaction set number.
-segments | array | segments or loops associated with the transaction set.
+segments | array | segments or loops associated with the interchange.
 
 In Electronic Data Interchange (EDI), a **set** represents a particular type of transaction or interchange, such as an order, invoice, or shipment notice. For example, the ANSI X12 standard includes transaction sets like 850 (Purchase Order) and 810 (Invoice).
 
@@ -1719,19 +1719,290 @@ Deleting the Interchange Rule will remove it from the system, but it will not pr
 # Loop Rules
 
 ## Create Loop Rule
-Submit a new Loop requirement.
+> Request:
+
+```json
+{
+    "loop": "LM",
+    "max": "1",
+    "segments": [
+        {
+            "segment": "CTT",
+            "segment rule": "a3d8d2b4-1a5c-4d2e-8e76-f6c9bc2041ae",
+            "optional": false
+        },
+        {
+            "segment": "AMT",
+            "segment rule": "b4d8d2b4-1a5c-3d2e-9d76-a6c9ad4441ae",
+            "optional": true
+        }
+    ]
+}
+```
+
+> OK Response:
+
+```json
+{
+  "id": "6B29FC40-CA47-1067-B31D-00DD010662DA",
+  "status": "success",
+  "reason": "queued"
+}
+```
+
+> Bad Response
+
+```json
+{
+  "id": "",
+  "status": "error",
+  "reason": "timed out"
+}
+```
+
+Submit a new Loop requirement. 
+### HTTP Request
+`POST http://example.com/v1/Loop`
+
+### Request Body
+Parameter|Type |Description
+---------|-----|-----------
+loop | string | name of loop.
+max | string | amount of repetitions.
+segments | array | segments associated with the loop.
+
+<aside class="notice">
+Max defaults to infinite if no max is declared.
+</aside>
+
+In Electronic Data Interchange (EDI), a **loop**  refers to a group of related segments that can repeat within a transaction set, allowing for the organization and representation of hierarchical data, such as multiple line items or detailed information pertaining to a specific aspect of the transaction.
+
+loops are typically composed of:
+
+- **Segments**: Unit of data within an EDI message that conveys a particular piece of information related to a transaction.
+
+<aside class="notice">
+Segments are ordinal.
+</aside>
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+id| string | unique identifier associated with the EDI transaction.
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 ## Get Loop Rule
+> OK Response:
+
+```json
+{
+  "rule": {
+    "loop": "LM",
+    "max": "1",
+    "segments": [
+        {
+            "segment": "CTT",
+            "segment rule": "a3d8d2b4-1a5c-4d2e-8e76-f6c9bc2041ae",
+            "optional": false
+        },
+        {
+            "segment": "AMT",
+            "segment rule": "b4d8d2b4-1a5c-3d2e-9d76-a6c9ad4441ae",
+            "optional": true
+        }
+    ]
+  },
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "rule": "",
+  "status": "error",
+  "reason": "match not found"
+}
+```
+
 Retrieve a specific Loop requirement by the Loop Rule ID.
+### HTTP Request
+`GET http://example.com/api/v1/Loop`
+
+
+### Query Parameters
+
+Parameter|Type |Description
+---------|-----|-----------
+id| string | unique identifier associated with the Loop Rule.
+type | string | the data type to return.
+
+<aside class="notice">
+Loop Rule ID's are generated on creation of a Loop Rule.
+</aside>
+
+<aside class="notice">
+Supported types are EDI, JSON, and XML.
+</aside>
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+rule | array | loop requirements.
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 ## Get Loop Rules
-Retreive all Loop requirements of an Interchange by the Interchange ID.
+> OK Response:
+
+```json
+{
+  "rules": [
+      "550e8400-e29b-41d4-a716-446655440000",
+      "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "b2a4e3d2-e5b0-4bcf-8f34-2c17d4746b29",
+      "4b1aef76-d6f8-4b16-92f8-f3a7c5d4d2c3",
+      "d19d1cb4-1df0-4bb1-8f26-8972f06c4d3c",
+      "cfa3e8bb-8b74-49cf-9e6f-f01a05b09f9e",
+      "8d19e6e7-154c-41c1-bc05-45e0c7f3e8d0",
+      "e2b1c062-27e3-4f7c-b5b1-e30a6f6f4e60",
+      "1f8a59dc-fc65-43ff-a203-b0f8e73a63a4",
+      "72b7e1a3-2345-40d8-b82b-9e3a4b45265a"
+  ],
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "rules": [],
+  "status": "error",
+  "reason": "match not found"
+}
+```
+Fetch a list of all Loop requirement IDs of an Interchange by the Interchange ID.
+### HTTP Request
+`GET http://example.com/api/v1/Loop`
+
+### Query Parameters
+
+Parameter|Type |Description
+---------|-----|-----------
+id | string | the Interchange ID
+page | integer | the current page number in a paginated data set.
+size | integer | the number of items to be included on each page.
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+rules | array | Loop Rule IDs.
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
+
+<aside class="notice">
+Size limitations prevent all rules from appearing. The ID associated with the rule appears instead and the <code>GET Loop</code> endpoint can be used to view the details of each ruleset.
+</aside>
 
 ## Update Loop Rule
+> Request:
+
+```json
+{
+  "id": "72b7e1a3-2345-40d8-b82b-9e3a4b45265a",
+  "loop": "LM",
+  "max": "1",
+  "segments": [
+      {
+          "segment": "CTT",
+          "segment rule": "a3d8d2b4-1a5c-4d2e-8e76-f6c9bc2041ae",
+          "optional": false
+      },
+      {
+          "segment": "AMT",
+          "segment rule": "b4d8d2b4-1a5c-3d2e-9d76-a6c9ad4441ae",
+          "optional": true
+      }
+  ]
+}
+```
+
+> OK Response:
+
+```json
+{
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "status": "error",
+  "reason": "match not found"
+}
+```
+
 Modify an existing Loop requirement.
+### HTTP Request
+`PUT http://example.com/v1/Loop`
+
+### Request Body
+
+Parameter|Type |Description
+---------|-----|-----------
+id| string | unique identifier associated with the Loop Rule.
+loop | string | name of loop.
+max | string | amount of repetitions.
+segments | array | segments associated with the loop.
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 ## Delete Loop Rule
+> OK Response:
+
+```json
+{
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "status": "error",
+  "reason": "match not found"
+}
+```
+
 Remove a specific Loop requirement from the system. 
+### HTTP Request
+`DELETE http://example.com/v1/Loop`
+
+### Query Parameters
+
+Parameter|Type |Description
+---------|-----|-----------
+id | string | unique identifier associated with the Loop Rule.
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 <aside class="warning">
 Deleting the Loop Rule will remove it from the system, but it will not prevent any existing processes from completing their current operations on that transaction.
