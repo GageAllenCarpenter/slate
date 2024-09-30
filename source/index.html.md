@@ -2011,19 +2011,404 @@ Deleting the Loop Rule will remove it from the system, but it will not prevent a
 # Segment Rules
 
 ## Create Segment Rule
-Submit a new Segment requirement
+> Request:
+
+```json
+{
+  "segment": "ST",
+  "elements": [
+    {
+      "expression": "^[0-9]{3}$",
+      "values": [
+          100, 101, 102, 103, 104, 105, 106, 107, 108, 109,
+          110, 111, 112, 113, 120, 121, 124, 125, 126, 127,
+          128, 129, 130, 131, 132, 133, 135, 138, 139, 140,
+          141, 142, 143, 144, 146, 147, 148, 149, 150, 151,
+          152, 153, 154, 155, 157, 158, 159, 160, 161, 163,
+          170, 175, 176, 179, 180, 185, 186, 187, 188, 189,
+          190, 191, 194, 195, 196, 197, 198, 199, 200, 201,
+          202, 203, 204, 205, 206, 210, 211, 212, 213, 214,
+          215, 216, 217, 219, 220, 222, 223, 224, 225, 227,
+          228, 240, 242, 244, 245, 248, 249, 250, 251, 252,
+          255, 256, 259, 260, 261, 262, 263, 264, 265, 266,
+          267, 268, 269, 270, 271, 272, 273, 274, 275, 276,
+          277, 278, 280, 283, 284, 285, 286, 288, 290, 300,
+          301, 303, 304, 309, 310, 311, 312, 313, 315, 317,
+          319, 322, 323, 324, 325, 326, 350, 352, 353, 354,
+          355, 356, 357, 358, 359, 361, 362, 404, 410, 412,
+          414, 417, 418, 419, 420, 421, 422, 423, 424, 425,
+          426, 429, 431, 432, 433, 434, 435, 436, 437, 440,
+          451, 452, 453, 455, 456, 460, 463, 466, 468, 470,
+          475, 485, 486, 490, 492, 494, 500, 501, 503, 504,
+          511, 517, 521, 527, 536, 540, 561, 567, 568, 601,
+          603, 620, 625, 650, 715, 753, 754, 805, 806, 810,
+          811, 812, 813, 814, 815, 816, 818, 819, 820, 821,
+          822, 823, 824, 826, 827, 828, 829, 830, 831, 832,
+          833, 834, 835, 836, 837, 838, 839, 840, 841, 842,
+          843, 844, 845, 846, 847, 848, 849, 850, 851, 852,
+          853, 854, 855, 856, 857, 858, 859, 860, 861, 862,
+          863, 864, 865, 866, 867, 868, 869, 870, 871, 872,
+          873, 874, 875, 876, 877, 878, 879, 880, 881, 882,
+          883, 884, 885, 886, 887, 888, 889, 890, 891, 892,
+          893, 894, 895, 896, 897, 920, 924, 925, 926, 928,
+          940, 943, 944, 945, 947, 980, 990, 993, 996, 997,
+          998, 999
+      ],
+      "optional": false
+    },
+    {
+      "expression": "^[A-Z0-9]{4,9}$",
+      "values": [],
+      "optional": false
+    },
+    {
+      "expression": "^[A-Z0-9 ]{1,35}$",
+      "values": [],
+      "optional": true
+    },
+  ]
+}
+```
+
+> OK Response:
+
+```json
+{
+  "id": "6B29FC40-CA47-1067-B31D-00DD010662DA",
+  "status": "success",
+  "reason": "queued"
+}
+```
+
+> Bad Response
+
+```json
+{
+  "id": "",
+  "status": "error",
+  "reason": "timed out"
+}
+```
+
+Submit a new Segment requirement.
+### HTTP Request
+`POST http://example.com/v1/Segment`
+
+### Request Body
+Parameter|Type |Description
+---------|-----|-----------
+segment | string | specifies the segment type.
+elements | array | contains individual data components within the segment.
+expression | string | regular expression that outlines acceptable data patterns.
+values | array | lists predefined acceptable values for the element.
+optional | boolean | indicates whether the element is mandatory or not.
+
+In Electronic Data Interchange (EDI), a **segment**  refers to a unit of data within an EDI message that conveys a particular piece of information related to a transaction.
+
+segments are typically composed of:
+
+- **elements**: Individual data components within a segment that hold specific information. Each element is defined by its data type and may have specific formats or constraints. Elements are separated by delimiters and can be mandatory, optional, or conditional based on the segment's context. 
+
+For example:
+- The ST segment may contain a Transaction Set Identifier Code (ST-01) and the Transaction Set Control Number (ST-02).
+
+<aside class="notice">
+Elements are ordinal.
+</aside>
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+id| string | unique identifier associated with the EDI transaction.
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 ## Get Segment Rule
+> OK Response:
+
+```json
+{
+  "rule": {
+    "segment": "ST",
+    "elements": [
+      {
+        "expression": "^[0-9]{3}$",
+        "values": [
+            100, 101, 102, 103, 104, 105, 106, 107, 108, 109,
+            110, 111, 112, 113, 120, 121, 124, 125, 126, 127,
+            128, 129, 130, 131, 132, 133, 135, 138, 139, 140,
+            141, 142, 143, 144, 146, 147, 148, 149, 150, 151,
+            152, 153, 154, 155, 157, 158, 159, 160, 161, 163,
+            170, 175, 176, 179, 180, 185, 186, 187, 188, 189,
+            190, 191, 194, 195, 196, 197, 198, 199, 200, 201,
+            202, 203, 204, 205, 206, 210, 211, 212, 213, 214,
+            215, 216, 217, 219, 220, 222, 223, 224, 225, 227,
+            228, 240, 242, 244, 245, 248, 249, 250, 251, 252,
+            255, 256, 259, 260, 261, 262, 263, 264, 265, 266,
+            267, 268, 269, 270, 271, 272, 273, 274, 275, 276,
+            277, 278, 280, 283, 284, 285, 286, 288, 290, 300,
+            301, 303, 304, 309, 310, 311, 312, 313, 315, 317,
+            319, 322, 323, 324, 325, 326, 350, 352, 353, 354,
+            355, 356, 357, 358, 359, 361, 362, 404, 410, 412,
+            414, 417, 418, 419, 420, 421, 422, 423, 424, 425,
+            426, 429, 431, 432, 433, 434, 435, 436, 437, 440,
+            451, 452, 453, 455, 456, 460, 463, 466, 468, 470,
+            475, 485, 486, 490, 492, 494, 500, 501, 503, 504,
+            511, 517, 521, 527, 536, 540, 561, 567, 568, 601,
+            603, 620, 625, 650, 715, 753, 754, 805, 806, 810,
+            811, 812, 813, 814, 815, 816, 818, 819, 820, 821,
+            822, 823, 824, 826, 827, 828, 829, 830, 831, 832,
+            833, 834, 835, 836, 837, 838, 839, 840, 841, 842,
+            843, 844, 845, 846, 847, 848, 849, 850, 851, 852,
+            853, 854, 855, 856, 857, 858, 859, 860, 861, 862,
+            863, 864, 865, 866, 867, 868, 869, 870, 871, 872,
+            873, 874, 875, 876, 877, 878, 879, 880, 881, 882,
+            883, 884, 885, 886, 887, 888, 889, 890, 891, 892,
+            893, 894, 895, 896, 897, 920, 924, 925, 926, 928,
+            940, 943, 944, 945, 947, 980, 990, 993, 996, 997,
+            998, 999
+        ],
+        "optional": false
+      },
+      {
+          "expression": "^[A-Z0-9]{4,9}$",
+          "values": [],
+          "optional": false
+      },
+      {
+          "expression": "^[A-Z0-9 ]{1,35}$",
+          "values": [],
+          "optional": true
+      },
+    ]
+  },
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "rule": "",
+  "status": "error",
+  "reason": "match not found"
+}
+```
+
 Retreive a specific Segment requirement by the Segment Rule ID.
+### HTTP Request
+`GET http://example.com/api/v1/Segment`
+
+
+### Query Parameters
+
+Parameter|Type |Description
+---------|-----|-----------
+id| string | unique identifier associated with the Segment Rule.
+type | string | the data type to return.
+
+<aside class="notice">
+Segment Rule ID's are generated on creation of a Segment Rule.
+</aside>
+
+<aside class="notice">
+Supported types are EDI, JSON, and XML.
+</aside>
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+rule | array | segment requirements.
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 ## Get Segment Rules
-Retreive all Segment requirements of an Interchange by the Interchange ID.
+> OK Response:
+
+```json
+{
+  "rules": [
+      "550e8400-e29b-41d4-a716-446655440000",
+      "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "b2a4e3d2-e5b0-4bcf-8f34-2c17d4746b29",
+      "4b1aef76-d6f8-4b16-92f8-f3a7c5d4d2c3",
+      "d19d1cb4-1df0-4bb1-8f26-8972f06c4d3c",
+      "cfa3e8bb-8b74-49cf-9e6f-f01a05b09f9e",
+      "8d19e6e7-154c-41c1-bc05-45e0c7f3e8d0",
+      "e2b1c062-27e3-4f7c-b5b1-e30a6f6f4e60",
+      "1f8a59dc-fc65-43ff-a203-b0f8e73a63a4",
+      "72b7e1a3-2345-40d8-b82b-9e3a4b45265a"
+  ],
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "rules": [],
+  "status": "error",
+  "reason": "match not found"
+}
+```
+
+Fetch a list of all Segment requirements of an Interchange by the Interchange ID.
+### HTTP Request
+`GET http://example.com/api/v1/Segment`
+
+### Query Parameters
+
+Parameter|Type |Description
+---------|-----|-----------
+id | string | the Interchange ID
+page | integer | the current page number in a paginated data set.
+size | integer | the number of items to be included on each page.
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+rules | array | Segment Rule IDs.
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
+
+<aside class="notice">
+Size limitations prevent all rules from appearing. The ID associated with the rule appears instead and the <code>GET Segment</code> endpoint can be used to view the details of each ruleset.
+</aside>
 
 ## Update Segment Rule
+> Request:
+
+```json
+{
+  "id": "72b7e1a3-2345-40d8-b82b-9e3a4b45265a",
+  "segment": "ST",
+  "elements": [
+    {
+      "expression": "^[0-9]{3}$",
+      "values": [
+          100, 101, 102, 103, 104, 105, 106, 107, 108, 109,
+          110, 111, 112, 113, 120, 121, 124, 125, 126, 127,
+          128, 129, 130, 131, 132, 133, 135, 138, 139, 140,
+          141, 142, 143, 144, 146, 147, 148, 149, 150, 151,
+          152, 153, 154, 155, 157, 158, 159, 160, 161, 163,
+          170, 175, 176, 179, 180, 185, 186, 187, 188, 189,
+          190, 191, 194, 195, 196, 197, 198, 199, 200, 201,
+          202, 203, 204, 205, 206, 210, 211, 212, 213, 214,
+          215, 216, 217, 219, 220, 222, 223, 224, 225, 227,
+          228, 240, 242, 244, 245, 248, 249, 250, 251, 252,
+          255, 256, 259, 260, 261, 262, 263, 264, 265, 266,
+          267, 268, 269, 270, 271, 272, 273, 274, 275, 276,
+          277, 278, 280, 283, 284, 285, 286, 288, 290, 300,
+          301, 303, 304, 309, 310, 311, 312, 313, 315, 317,
+          319, 322, 323, 324, 325, 326, 350, 352, 353, 354,
+          355, 356, 357, 358, 359, 361, 362, 404, 410, 412,
+          414, 417, 418, 419, 420, 421, 422, 423, 424, 425,
+          426, 429, 431, 432, 433, 434, 435, 436, 437, 440,
+          451, 452, 453, 455, 456, 460, 463, 466, 468, 470,
+          475, 485, 486, 490, 492, 494, 500, 501, 503, 504,
+          511, 517, 521, 527, 536, 540, 561, 567, 568, 601,
+          603, 620, 625, 650, 715, 753, 754, 805, 806, 810,
+          811, 812, 813, 814, 815, 816, 818, 819, 820, 821,
+          822, 823, 824, 826, 827, 828, 829, 830, 831, 832,
+          833, 834, 835, 836, 837, 838, 839, 840, 841, 842,
+          843, 844, 845, 846, 847, 848, 849, 850, 851, 852,
+          853, 854, 855, 856, 857, 858, 859, 860, 861, 862,
+          863, 864, 865, 866, 867, 868, 869, 870, 871, 872,
+          873, 874, 875, 876, 877, 878, 879, 880, 881, 882,
+          883, 884, 885, 886, 887, 888, 889, 890, 891, 892,
+          893, 894, 895, 896, 897, 920, 924, 925, 926, 928,
+          940, 943, 944, 945, 947, 980, 990, 993, 996, 997,
+          998, 999
+      ],
+      "optional": false
+    },
+    {
+      "expression": "^[A-Z0-9]{4,9}$",
+      "values": [],
+      "optional": false
+    },
+    {
+      "expression": "^[A-Z0-9 ]{1,35}$",
+      "values": [],
+      "optional": true
+    },
+  ]
+}
+```
+
+> OK Response:
+
+```json
+{
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "status": "error",
+  "reason": "match not found"
+}
+```
+
 Modify an existing Segment requirement.
+### HTTP Request
+`PUT http://example.com/v1/Segment`
+
+### Request Body
+
+Parameter|Type |Description
+---------|-----|-----------
+id| string | unique identifier associated with the Segment Rule.
+
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 ## Delete Segment Rule
-Remove a specific Segment requirement from the system. 
+> OK Response:
+
+```json
+{
+  "status": "success",
+  "reason": "match found"
+}
+```
+
+> Bad Response:
+
+```json
+{
+  "status": "error",
+  "reason": "match not found"
+}
+```
+
+Remove a specific Segment requirement from the system.  
+### HTTP Request
+`DELETE http://example.com/v1/Segment`
+
+### Query Parameters
+
+Parameter|Type |Description
+---------|-----|-----------
+id | string | unique identifier associated with the Segment Rule.
+
+### Response Body
+Parameter|Type |Description
+---------|-----|-----------
+status | string | state or condition of the request.
+reason | string | description of the state or condition of the request.
 
 <aside class="warning">
 Deleting the Segment Rule will remove it from the system, but it will not prevent any existing processes from completing their current operations on that transaction.
